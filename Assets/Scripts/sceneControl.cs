@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class sceneControl : MonoBehaviour
 {
     Scene CurrentScene;
-    [SerializeField] GameObject GameOverPanel;
     public void loadGame()
     {
         SceneManager.LoadScene("game");
@@ -18,26 +17,24 @@ public class sceneControl : MonoBehaviour
     }
     public void TryAgain()
     {
-        /*CurrentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(CurrentScene.buildIndex,LoadSceneMode.Single);*/
         FindObjectOfType<GameSession>().ResetGame();
         /*Resources.UnloadUnusedAssets();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);*/
-        SceneManager.LoadScene("game");
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
         Time.timeScale = 1;
-        //GameOverPanel.SetActive(false);
     }
     public void menu()
     {
-        //GameOverPanel.SetActive(false);
+        FindObjectOfType<GameSession>().ResetGame();
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
        
     }
     public void NextScene()
     {
-        int mevcutSahneninIndeksi = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(mevcutSahneninIndeksi + 1);
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene + 1);
         Time.timeScale = 1;
 
     }
